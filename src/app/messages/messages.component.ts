@@ -1,16 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../message.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-messages',
+  selector: 'app-messages-ui',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.css']
 })
-export class MessagesComponent implements OnInit {
-
-  constructor(public messageService: MessageService) {}
-
-  ngOnInit() {
-  }
+export class MessagesComponent {
+  @Input() messages;
+  @Output() clear = new EventEmitter();
 
 }

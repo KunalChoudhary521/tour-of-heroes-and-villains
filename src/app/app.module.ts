@@ -17,6 +17,7 @@ import { MessagesComponent }    from './messages/messages.component';
 import { DashboardContainerComponent } from './dashboard/dashboard.container';
 import { HeroDetailContainerComponent } from './hero-detail/hero-detail.container';
 import { HeroesContainerComponent } from './heroes/heroes.container';
+import { MessagesContainerComponent } from './messages/messages.container';
 
 @NgModule({
   imports: [
@@ -40,6 +41,7 @@ import { HeroesContainerComponent } from './heroes/heroes.container';
     HeroesComponent,
     HeroDetailContainerComponent,
     HeroDetailComponent,
+    MessagesContainerComponent,
     MessagesComponent,
     HeroSearchComponent
   ],
