@@ -1,16 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardComponent } from './dashboard.component';
+import { DashboardContainerComponent } from './dashboard.container';
 import { HeroSearchComponent } from '../hero-search/hero-search.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { HEROES } from '../mock-heroes';
 import { HeroService } from '../hero.service';
+import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+  let component: DashboardContainerComponent;
+  let fixture: ComponentFixture<DashboardContainerComponent>;
   let heroService;
   let getHeroesSpy;
 
@@ -19,6 +20,7 @@ describe('DashboardComponent', () => {
     getHeroesSpy = heroService.getHeroes.and.returnValue( of(HEROES) );
     TestBed.configureTestingModule({
       declarations: [
+        DashboardContainerComponent,
         DashboardComponent,
         HeroSearchComponent
       ],
@@ -34,7 +36,7 @@ describe('DashboardComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(DashboardContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
