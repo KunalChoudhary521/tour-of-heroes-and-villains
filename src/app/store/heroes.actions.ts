@@ -12,3 +12,7 @@ export const addHeroFail = createAction('[Heroes] Add Hero Fail', props<{ payloa
 export const deleteHero = createAction('[Heroes] Delete Hero', (hero: Hero) => ({ hero }));
 export const deleteHeroSuccess = createAction('[Heroes] Delete Hero Success', props<{ payload: Hero }>());
 export const deleteHeroFail = createAction('[Heroes] Delete Hero Fail', props<{ payload: any }>());
+
+export const updateHero = createAction('[Heroes] Update Hero', (hero: Hero) => ({ hero }));
+export const updateHeroSuccess = createAction('[Heroes] Update Hero Success', props<{ payload: Hero }>());
+export const updateHeroFail = createAction('[Heroes] Update Hero Fail', props<{ payload: any }>());
