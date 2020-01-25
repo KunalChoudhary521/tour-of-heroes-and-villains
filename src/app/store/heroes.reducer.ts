@@ -16,7 +16,11 @@ const _heroesReducer = createReducer(initialAppState,
 
   on(HeroesActions.addHero, state => ({...state })),
   on(HeroesActions.addHeroSuccess, (state, { payload }) => ({...state, heroes: [ ...state.heroes, payload ]})),
-  on(HeroesActions.addHeroFail, (state, { payload }) => ({...state, errors: payload}))
+  on(HeroesActions.addHeroFail, (state, { payload }) => ({...state, errors: payload})),
+
+  on(HeroesActions.deleteHero, state => ({...state })),
+  on(HeroesActions.deleteHeroSuccess, (state, { payload }) => ({...state, heroes: state.heroes.filter(h => h.id !== payload.id)})),
+  on(HeroesActions.deleteHeroFail, (state, { payload }) => ({...state, errors: payload}))
 );
 
 

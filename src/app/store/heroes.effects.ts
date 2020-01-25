@@ -26,6 +26,15 @@ export class HeroesEffects {
     )
   );
 
+  deleteHero$ = createEffect(() => this.actions$.pipe(
+    ofType(HeroesActions.deleteHero.type),
+    mergeMap(({ hero }) => this.heroService.deleteHero(hero).pipe(
+      map(() => ({ type: HeroesActions.deleteHeroSuccess.type, payload: hero })),
+      catchError((err) => of({ type: HeroesActions.deleteHeroFail.type, payload: err }))
+    ))
+    )
+  );
+
   constructor(private actions$: Actions,
               private heroService: HeroService) {}
 }
