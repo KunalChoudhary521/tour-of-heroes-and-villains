@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { heroesSelector } from '../store/heroes.selector';
-import { addHero } from '../store/heroes.actions';
+import { addHero, deleteHero } from '../store/heroes.actions';
 
 @Component({
   selector: 'app-heroes',
@@ -32,6 +32,7 @@ export class HeroesContainerComponent {
   }
 
   delete(heroToDelete: Hero): void {
+    this.store.dispatch(deleteHero(heroToDelete));
   }
 
 
