@@ -12,7 +12,11 @@ export const initialAppState: HeroesState = {
 const _heroesReducer = createReducer(initialAppState,
   on(HeroesActions.getHeroes, state => ({...state, isLoading: true})),
   on(HeroesActions.getHeroesSuccess, (state, { payload }) => ({...state, heroes: payload, isLoading: false})),
-  on(HeroesActions.getHeroesFail, (state, { payload }) => ({...state, heroes: null, isLoading: false, errors: payload}))
+  on(HeroesActions.getHeroesFail, (state, { payload }) => ({...state, heroes: null, isLoading: false, errors: payload})),
+
+  on(HeroesActions.addHero, state => ({...state })),
+  on(HeroesActions.addHeroSuccess, (state, { payload }) => ({...state, heroes: [ ...state.heroes, payload ]})),
+  on(HeroesActions.addHeroFail, (state, { payload }) => ({...state, errors: payload}))
 );
 
 
