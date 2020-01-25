@@ -18,6 +18,12 @@ import { DashboardContainerComponent } from './dashboard/dashboard.container';
 import { HeroDetailContainerComponent } from './hero-detail/hero-detail.container';
 import { HeroesContainerComponent } from './heroes/heroes.container';
 import { MessagesContainerComponent } from './messages/messages.container';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { HeroesEffects } from './store/heroes.effects';
+import { appReducers } from './store';
 
 @NgModule({
   imports: [
@@ -31,7 +37,10 @@ import { MessagesContainerComponent } from './messages/messages.container';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([HeroesEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production })
   ],
   declarations: [
     AppComponent,
