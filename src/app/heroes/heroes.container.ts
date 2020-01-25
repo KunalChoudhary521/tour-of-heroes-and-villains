@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { heroesSelector } from '../store/heroes.selector';
-
+import { addHero } from '../store/heroes.actions';
 
 @Component({
   selector: 'app-heroes',
@@ -25,6 +25,10 @@ export class HeroesContainerComponent {
   }
 
   add(name: string): void {
+    name = name.trim();
+    if (name) {
+      this.store.dispatch(addHero({ name } as Hero));
+    }
   }
 
   delete(heroToDelete: Hero): void {
