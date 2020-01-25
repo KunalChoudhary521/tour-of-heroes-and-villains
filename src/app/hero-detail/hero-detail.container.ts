@@ -3,11 +3,11 @@ import { Observable } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { Hero } from '../hero';
 import { ActivatedRoute } from '@angular/router';
-import { HeroService } from '../hero.service';
 import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from '../store';
 import { heroByIdSelector } from '../store/heroes.selector';
+import { updateHero } from '../store/heroes.actions';
 
 
 @Component({
@@ -28,7 +28,6 @@ export class HeroDetailContainerComponent {
                                                 switchMap(params => this.store.select(heroByIdSelector, +params.get('id'))));
 
   constructor(private route: ActivatedRoute,
-              private heroService: HeroService,
               private location: Location,
               private store: Store<AppState>) { }
 
@@ -37,6 +36,6 @@ export class HeroDetailContainerComponent {
   }
 
   save(hero): void {
-    this.heroService.updateHero(hero).subscribe(() => this.goBack());
+    this.store.dispatch(updateHero(hero));
   }
 }
