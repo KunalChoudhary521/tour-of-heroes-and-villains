@@ -9,3 +9,4 @@ const selectHeroesState = createFeatureSelector<HeroesState>('hero'); // 'hero' 
 
 export const heroesSelector = createSelector(selectHeroesState, heroesState => heroesState.heroes);
 export const heroByIdSelector = createSelector(heroesSelector, (heroes, id) => heroes.find(h => h.id === id));
+export const matchingHeroNamesSelector = createSelector(heroesSelector, (heroes, term) => heroes.filter(h => h.name.includes(term)));
