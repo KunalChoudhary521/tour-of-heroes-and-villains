@@ -1,6 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { HeroesState } from './heroes.state';
 
-const hero = createFeatureSelector<HeroesState>('hero'); // 'hero' comes from index.ts
+/*
+* The following is equivalent to:
+* const selectHeroesState = (appState: AppState) => appState.heroesState;
+* */
+const selectHeroesState = createFeatureSelector<HeroesState>('hero'); // 'hero' comes from index.ts
 
-export const heroesSelector = createSelector(hero, h => h.heroes);
+export const heroesSelector = createSelector(selectHeroesState, heroesState => heroesState.heroes);
+export const heroByIdSelector = createSelector(heroesSelector, (heroes, id) => heroes.find(h => h.id === id));
