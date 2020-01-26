@@ -112,6 +112,30 @@
               "devServerTarget": "angular.io-example:serve:production"
             }
           }
+        },
+        "cypress-run": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "angular.io-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular.io-example:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@briebug/cypress-schematic:cypress",
+          "options": {
+            "devServerTarget": "angular.io-example:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "angular.io-example:serve:production"
+            }
+          }
         }
       }
     }
