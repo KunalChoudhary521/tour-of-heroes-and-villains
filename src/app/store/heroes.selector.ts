@@ -16,4 +16,5 @@ export const heroesSelector = createSelector(selectHeroesState, selectAll);
 
 const selectHeroEntities = createSelector(selectHeroesState, selectEntities);
 export const heroByIdSelector = createSelector(selectHeroEntities, (entities, heroId) => entities[heroId]);
-export const matchingHeroNamesSelector = createSelector(heroesSelector, (heroes, term) => heroes.filter(h => h.name.includes(term)));
+export const matchingHeroNamesSelector = createSelector(heroesSelector,
+                                                        (heroes, term) => term ? heroes.filter(h => h.name.includes(term)) : []);
