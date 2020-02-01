@@ -1,30 +1,30 @@
-import { HeroesState } from './heroes.state';
+import { heroAdapter, HeroesState } from './heroes.state';
 import { Action, createReducer, on } from '@ngrx/store';
 import * as HeroesActions from './heroes.actions';
 
-export const initialAppState: HeroesState = {
-  heroes: [],
+export const initialAppState: HeroesState = heroAdapter.getInitialState({
+  selectedHeroId: null,
   isLoading: false,
   errors: null
-};
+});
 
 // tslint:disable-next-line:variable-name
 const _heroesReducer = createReducer(initialAppState,
   on(HeroesActions.getHeroes, state => ({...state, isLoading: true})),
-  on(HeroesActions.getHeroesSuccess, (state, { payload }) => ({...state, heroes: payload, isLoading: false})),
-  on(HeroesActions.getHeroesFail, (state, { payload }) => ({...state, heroes: null, isLoading: false, errors: payload})),
+  on(HeroesActions.getHeroesSuccess, (state, { heroes }) => heroAdapter.addAll(heroes, state)),
+  on(HeroesActions.getHeroesFail, (state, { errors }) => ({...state, heroes: null, isLoading: false, errors })),
 
   on(HeroesActions.addHero, state => ({...state })),
-  on(HeroesActions.addHeroSuccess, (state, { payload }) => ({...state, heroes: [ ...state.heroes, payload ]})),
-  on(HeroesActions.addHeroFail, (state, { payload }) => ({...state, errors: payload})),
+  on(HeroesActions.addHeroSuccess, (state, { hero }) => heroAdapter.addOne(hero, state)),
+  on(HeroesActions.addHeroFail, (state, { errors }) => ({...state, errors })),
 
   on(HeroesActions.deleteHero, state => ({...state })),
-  on(HeroesActions.deleteHeroSuccess, (state, { payload }) => ({...state, heroes: state.heroes.filter(h => h.id !== payload.id)})),
-  on(HeroesActions.deleteHeroFail, (state, { payload }) => ({...state, errors: payload})),
+  on(HeroesActions.deleteHeroSuccess, (state, { heroId }) => heroAdapter.removeOne(heroId, state)),
+  on(HeroesActions.deleteHeroFail, (state, { errors }) => ({...state, errors })),
 
   on(HeroesActions.updateHero, state => ({...state })),
-  on(HeroesActions.updateHeroSuccess, (state, { payload }) => ({...state, heroes: state.heroes.map(h => h.id !== payload.id ? h : payload)})),
-  on(HeroesActions.updateHeroFail, (state, { payload }) => ({...state, errors: payload}))
+  on(HeroesActions.updateHeroSuccess, (state, { hero }) => heroAdapter.updateOne(hero, state)),
+  on(HeroesActions.updateHeroFail, (state, { errors }) => ({...state, errors }))
 );
 
 
