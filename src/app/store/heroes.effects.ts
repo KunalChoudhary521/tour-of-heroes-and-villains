@@ -39,8 +39,8 @@ export class HeroesEffects {
 
   updateHero$ = createEffect(() => this.actions$.pipe(
     ofType(HeroesActions.updateHero.type),
-    switchMap(({ hero }) => this.heroService.updateHero(hero).pipe(
-      map(() => ({ type: HeroesActions.updateHeroSuccess.type, hero })),
+    switchMap(({ hero }: {hero: Hero}) => this.heroService.updateHero(hero).pipe(
+      map(() => ({ type: HeroesActions.updateHeroSuccess.type, hero: {id: hero.id, changes: hero} })),
       catchError((err) => of({ type: HeroesActions.updateHeroFail.type, payload: err }))
     ))
     )
