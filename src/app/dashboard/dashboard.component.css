@@ -1,63 +1,34 @@
 /* DashboardComponent's private CSS styles */
-[class*='col-'] {
-  float: left;
-  padding-right: 20px;
-  padding-bottom: 20px;
+h3 {
+  text-align: center;
 }
-[class*='col-']:last-of-type {
-  padding-right: 0;
-}
+
 a {
   text-decoration: none;
 }
-*, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+
+.dashboard-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
 }
-h3 {
-  text-align: center;
-  margin-bottom: 0;
-}
-h4 {
-  position: relative;
-}
-.grid {
-  margin: 0;
-}
-.col-1-4 {
-  width: 25%;
-}
-.module {
-  padding: 20px;
-  text-align: center;
+
+.dashboard-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem;
+  margin: .75rem 0;
   color: #eee;
-  max-height: 120px;
-  min-width: 120px;
+  height: 7.5rem;
+  width: 20rem;
   background-color: #3f525c;
   border-radius: 2px;
 }
-.module:hover {
-  background-color: #EEE;
+
+.dashboard-hero:hover {
+  background-color: #ddd;
   cursor: pointer;
   color: #607d8b;
-}
-.grid-pad {
-  padding: 10px 0;
-}
-.grid-pad > [class*='col-']:last-of-type {
-  padding-right: 20px;
-}
-@media (max-width: 600px) {
-  .module {
-    font-size: 10px;
-    max-height: 75px; }
-}
-@media (max-width: 1024px) {
-  .grid {
-    margin: 0;
-  }
-  .module {
-    min-width: 60px;
-  }
 }
