@@ -1,74 +1,74 @@
 /* HeroesComponent's private CSS styles */
+
+.heroes-header {
+  display: flex;
+  align-items: center;
+}
+
+.btn-add-hero {
+  margin-left: 1rem;
+  position: relative;
+  top: -5px;
+}
+
+.hero-label {
+  font-size: 1rem;
+}
+
+.hero-label input{
+  width: 15rem;
+}
+
 .heroes {
-  margin: 0 0 2em 0;
   list-style-type: none;
-  padding: 0;
-  width: 15em;
-}
-.heroes li {
-  position: relative;
-  cursor: pointer;
-  background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
-  height: 1.6em;
-  border-radius: 4px;
+  margin: 1rem 0;
+  width: 17.5rem;
 }
 
-.heroes li:hover {
+.heroes-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: .5rem;
+  font-size: 1rem;
+  background-color: #eee;
+  position: relative;
+}
+
+.heroes-item:hover {
   color: #607D8B;
-  background-color: #DDD;
-  left: .1em;
+  background-color: #ddd;
+  left: .1rem;
 }
 
-.heroes a {
-  color: #333;
-  text-decoration: none;
-  position: relative;
-  display: block;
-  width: 250px;
+.heroes-item__link {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  cursor: pointer;
 }
 
-.heroes a:hover {
-  color:#607D8B;
-}
-
-.heroes .badge {
-  display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
+.heroes-item__id {
   background-color:#405061;
-  line-height: 1em;
-  position: relative;
-  left: -1px;
-  top: -4px;
-  height: 1.8em;
-  min-width: 16px;
-  text-align: right;
-  margin-right: .8em;
+  padding: .4rem;
+  color: #ddd;
   border-radius: 4px 0 0 4px;
 }
 
-button {
-  background-color: #eee;
+.heroes-item__name {
+  margin-left: 2rem;
+}
+
+.heroes-item__delete {
   border: none;
-  padding: 5px 10px;
+  padding: 0.2rem 0.6rem;
   border-radius: 4px;
   cursor: pointer;
-  cursor: hand;
-  font-family: Arial;
-}
 
-button:hover {
-  background-color: #cfd8dc;
-}
-
-button.delete {
-  position: relative;
-  left: 194px;
-  top: -32px;
-  background-color: gray !important;
+  background-color: gray;
   color: white;
 }
+
 

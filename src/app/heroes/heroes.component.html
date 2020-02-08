@@ -1,21 +1,19 @@
 <h2>My Heroes</h2>
 
-<div>
-  <label>Hero name:
-    <input #heroName />
-  </label>
+<div class="heroes-header">
+  <label class="hero-label">Hero name: <input #heroName /></label>
   <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="addHero.emit(heroName.value); heroName.value=''">
-    add
-  </button>
+  <button class="btn-add-hero btn btn-primary" title="add hero"
+          (click)="addHero.emit(heroName.value); heroName.value=''">Add</button>
 </div>
 
 <ul class="heroes">
-  <li *ngFor="let hero of heroes">
-    <a (click)="selectHero.emit(hero.id)">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
+  <li class="heroes-item" *ngFor="let hero of heroes">
+    <a class="heroes-item__link" (click)="selectHero.emit(hero.id)">
+      <span class="heroes-item__id">{{hero.id}}</span>
+      <span class="heroes-item__name">{{hero.name}}</span>
     </a>
-    <button class="delete" title="delete hero"
-      (click)="deleteHero.emit(hero)">x</button>
+    <button class="heroes-item__delete"
+            title="delete hero" (click)="deleteHero.emit(hero)">x</button>
   </li>
 </ul>
