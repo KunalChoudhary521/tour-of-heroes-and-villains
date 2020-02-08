@@ -13,8 +13,8 @@ describe('Tour of Heroes - E2E tests', () => {
     });
 
     it(`displays heroes-app tabs`, () => {
-      cy.get('nav').children().contains('Dashboard');
-      cy.get('nav').children().contains('Heroes');
+      cy.get('app-root .nav-item').children().contains('Dashboard');
+      cy.get('app-root .nav-item').children().contains('Heroes');
     });
 
     it('has dashboard as the active view', () => {
@@ -49,7 +49,7 @@ describe('Tour of Heroes - E2E tests', () => {
     });
 
     it('can switch to Heroes view', () => {
-      cy.get('app-root nav a').eq(1).click();
+      cy.get('app-root .nav-item a').eq(1).click();
       cy.get('app-heroes').should('exist');
       cy.get('app-heroes h2').contains('My Heroes');
 
@@ -88,14 +88,14 @@ describe('Tour of Heroes - E2E tests', () => {
 
       cy.url().should('include', '/detail/');
 
-      cy.get('app-hero-detail-ui button').contains('go back').click();
+      cy.get('app-hero-detail-ui button').contains('Back').click();
       cy.url().should('include', '/heroes');
     });
 
     it('adds hero', () => {
       cy.get(`app-heroes-ui ul li`).should('have.length', 10);
       cy.get('app-heroes-ui input').type('Brand New Hero');
-      cy.get('app-heroes-ui button').contains('add').click();
+      cy.get('app-heroes-ui button').contains('Add').click();
 
       cy.get(`app-heroes-ui ul li`).should('have.length', 11);
       cy.get(`app-heroes-ui ul li`).contains('Brand New Hero');
@@ -105,8 +105,8 @@ describe('Tour of Heroes - E2E tests', () => {
     it('updates hero', () => {
       cy.get(`app-heroes-ui ul li`).last().click();
       cy.url().should('include', '/detail');
-      cy.get('app-hero-detail-ui input').clear().type('Updated Hero');
-      cy.get('app-hero-detail-ui button').contains('save').click();
+      cy.get('app-hero-detail-ui #heroName').clear().type('Updated Hero');
+      cy.get('app-hero-detail-ui button').contains('Save').click();
       cy.url().should('include', '/heroes');
 
       cy.get(`app-heroes-ui ul li`).contains('Updated Hero');
@@ -123,11 +123,26 @@ describe('Tour of Heroes - E2E tests', () => {
       cy.get(`app-heroes-ui ul li`).should('have.length', 9);
     });
 
+    it('does not update hero if "Back" button is clicked', () => {
+      cy.get(`app-heroes-ui ul li`).first().should(hero => {
+        expect(hero).to.contain('Dr Nice');
+      });
+
+      cy.get(`app-heroes-ui ul li`).first().click();
+      cy.get('app-hero-detail-ui #heroName').clear().type('Not to be updated');
+      cy.get('app-hero-detail-ui button').contains('Back').click();
+
+      cy.get('app-heroes-ui ul li').should((list) => {
+        expect(list).to.not.contain('Not to be updated');
+        expect(list).to.contain('Dr Nice');
+      });
+    });
+
     it('clears Messages by clicking the "clear" button', () => {
       cy.get(`app-messages-ui`).should('exist');
-      cy.get(`app-messages-ui h2`).contains('Messages');
-      cy.get(`app-messages-ui div.hero-message`).should('have.length', 5);
-      cy.get(`app-messages-ui button`).contains('clear').click();
+      cy.get(`app-messages-ui .messages-title`).contains('Messages');
+      cy.get(`app-messages-ui .hero-message`).should('have.length', 5);
+      cy.get(`app-messages-ui button`).contains('Clear').click();
 
       cy.get(`app-messages-ui div`).should('not.exist');
     });
