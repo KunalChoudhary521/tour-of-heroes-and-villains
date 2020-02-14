@@ -2,6 +2,7 @@
 .messages-container {
   margin: 1rem 0;
   width: 33.3%;
+  min-width: 23rem;
 }
 
 .messages-header {
