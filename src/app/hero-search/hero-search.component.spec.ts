@@ -3,6 +3,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { HeroSearchComponent } from './hero-search.component';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from '../store';
 
 
 describe('HeroSearchComponent', () => {
@@ -12,7 +14,7 @@ describe('HeroSearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HeroSearchComponent ],
-      imports: [RouterTestingModule.withRoutes([]), HttpClientTestingModule]
+      imports: [RouterTestingModule.withRoutes([]), HttpClientTestingModule, StoreModule.forRoot(appReducers)]
     })
     .compileComponents();
   }));
