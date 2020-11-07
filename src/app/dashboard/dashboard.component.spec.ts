@@ -4,20 +4,18 @@ import { DashboardContainerComponent } from './dashboard.container';
 import { HeroSearchComponent } from '../hero-search/hero-search.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
 import { HEROES } from '../mock-heroes';
-import { HeroService } from '../hero.service';
 import { DashboardComponent } from './dashboard.component';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { AppState } from '../store';
+import { initialAppState } from '../store/heroes.reducer';
 
 describe('DashboardComponent', () => {
   let component: DashboardContainerComponent;
   let fixture: ComponentFixture<DashboardContainerComponent>;
-  let heroService;
-  let getHeroesSpy;
+  let store: MockStore<AppState>;
 
   beforeEach(async(() => {
-    heroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
-    getHeroesSpy = heroService.getHeroes.and.returnValue( of(HEROES) );
     TestBed.configureTestingModule({
       declarations: [
         DashboardContainerComponent,
@@ -28,7 +26,15 @@ describe('DashboardComponent', () => {
         RouterTestingModule.withRoutes([])
       ],
       providers: [
-        { provide: HeroService, useValue: heroService }
+        provideMockStore<AppState>({initialState: {
+          hero: {
+            ...initialAppState,
+            entities: HEROES.reduce((map, obj) => { map[obj.id] = obj; return map; } , {}),
+            ids: HEROES.map(h => h.id)
+          },
+        }
+        }),
+        MockStore
       ]
     })
     .compileComponents();
@@ -39,6 +45,7 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    store = TestBed.get(MockStore);
   });
 
   it('should be created', () => {
@@ -49,11 +56,8 @@ describe('DashboardComponent', () => {
     expect(fixture.nativeElement.querySelector('h3').textContent).toEqual('Top Heroes');
   });
 
-  it('should call heroService', async(() => {
-    expect(getHeroesSpy.calls.any()).toBe(true);
-    }));
-
-  it('should display 4 links', async(() => {
+  it('should display 4 hero links', async(() => {
+    expect(store).toBeTruthy();
     expect(fixture.nativeElement.querySelectorAll('a').length).toEqual(4);
   }));
 
