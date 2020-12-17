@@ -7,7 +7,9 @@
     "lint": "tslint ./src/**/*.ts -t verbose",
     "start": "ng serve",
     "test": "ng test",
+    "test-ci": "ng test --karma-config=./karma.conf.ci.js",
     "build": "ng build --prod",
+    "build-ci": "ng build --prod=true --output-hashing=none --outputPath=./toh-dist/",
     "e2e": "cypress open",
     "ng": "ng"
   },
