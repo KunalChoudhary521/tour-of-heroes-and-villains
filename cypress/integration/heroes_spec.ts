@@ -3,9 +3,9 @@ describe('Tour of Heroes - E2E tests', () => {
 
   describe('Initial Page', () => {
 
-    /* method executes before ALL tests in a describe block*/
+    /* method executes before ALL tests in a 'describe' block*/
     before(() => {
-      cy.visit('http://localhost:4200');
+      cy.visit('/');
     });
 
     it('displays title', () => {
@@ -33,7 +33,7 @@ describe('Tour of Heroes - E2E tests', () => {
   describe('Dashboard tests', () => {
 
     before(() => {
-      cy.visit('http://localhost:4200');
+      cy.visit('/');
     });
 
     it('has 4 top heroes', () => {
@@ -61,7 +61,7 @@ describe('Tour of Heroes - E2E tests', () => {
   describe('Hero search tests', () => {
 
     before(() => {
-      cy.visit('http://localhost:4200');
+      cy.visit('/');
     });
 
     it('can search for a hero', () => {
@@ -79,7 +79,7 @@ describe('Tour of Heroes - E2E tests', () => {
   describe('Perform CRUD on Heroes', () => {
 
     before(() => {
-      cy.visit('http://localhost:4200/heroes');
+      cy.visit('/heroes');
     });
 
     it('shows hero-detail component by clicking on a hero', () => {
